@@ -11,5 +11,7 @@ module.exports = function (app) {
   app.route('/:url(api|modules|lib)/*').get(core.renderNotFound);
 
   // Define application route
+  app.route('/menu').get(core.renderMenu);
+  app.route('/drinks').get(core.renderMenu);
   app.route('/*').get(core.renderIndex);
 };

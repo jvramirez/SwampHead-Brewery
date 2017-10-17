@@ -4,18 +4,21 @@ angular.module('core').controller('MenuController', ['$scope', 'Authentication',
   function($scope, Authentication, DrinksService) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
-    
+
     var vm = this;
     var drinks = DrinksService.query();
     vm.drinks = drinks;
+    var timer;
 
-    setInterval(function() {
+    var interval = setInterval(updateDrinks, 5000);
+
+    function updateDrinks() {
       var drinks = DrinksService.query();
       drinks.$promise.then(
         function(result) {
           vm.drinks = result;
         });
-    }, 5000);
+    }
 
     $scope.topbarActive = true;
   }
